@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ملعب | عالم كرة القدم</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;font-family:Arial,sans-serif;
+ background:#07130f;color:#fff;
+}
+header{
+ background:#10251b;padding:20px;
+ display:flex;justify-content:space-between;
+ align-items:center;border-bottom:1px solid #294734;
+}
+.logo{font-size:25px;font-weight:bold;color:#b7ff62}
+nav a{color:white;text-decoration:none;margin:8px;font-size:14px}
+.hero{
+ padding:60px 20px;text-align:center;
+ background:radial-gradient(circle,#245536,#07130f 75%);
+}
+.hero h1{font-size:42px;margin:10px}
+.hero h1 span{color:#b7ff62}
+.hero p{color:#c3d4c8;line-height:2}
+button{
+ background:#b7ff62;border:0;border-radius:10px;
+ padding:13px 20px;font-weight:bold;cursor:pointer;
+}
+.container{max-width:1000px;margin:auto;padding:20px}
+h2{color:#b7ff62}
+.cards{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+ gap:15px;
+}
+.card{
+ background:#12271c;border:1px solid #294734;
+ border-radius:15px;padding:20px;text-align:center;
+}
+.teams{
+ display:flex;justify-content:space-around;
+ align-items:center;margin:25px 0;font-weight:bold;
+}
+.team{font-size:15px}
+.score{font-size:25px;color:#b7ff62;font-weight:bold}
+.badge{font-size:12px;color:#b7ff62}
+table{width:100%;border-collapse:collapse;background:#12271c}
+th,td{padding:14px 8px;text-align:center;border-bottom:1px solid #294734}
+th{color:#b7ff62}
+tr:hover{background:#1b3828}
+.news p{color:#c3d4c8;line-height:1.8}
+footer{text-align:center;padding:25px;color:#9bb2a5}
+@media(max-width:500px){
+ .hero h1{font-size:32px}
+ nav a{margin:3px;font-size:12px}
+ th,td{padding:11px 4px;font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="logo">⚽ ملعب+</div>
+ <nav>
+  <a href="#matches">المباريات</a>
+  <a href="#table">الترتيب</a>
+  <a href="#news">الأخبار</a>
+ </nav>
+</header>
+
+<section class="hero">
+ <div style="font-size:65px">⚽</div>
+ <h1>عالم كرة القدم <span>بين يديك</span></h1>
+ <p>تابع الفرق، اكتشف النتائج، وعِش أجواء المستطيل الأخضر.</p>
+ <button onclick="document.getElementById('matches').scrollIntoView({behavior:'smooth'})">
+  اكتشف المباريات
+ </button>
+</section>
+
+<main class="container">
+ <section id="matches">
+  <h2>🔥 مباريات اليوم</h2>
+  <p class="badge">نتائج تجريبية وليست مباشرة</p>
+  <div class="cards" id="matchCards"></div>
+ </section>
+
+ <section id="table" style="margin-top:40px">
+  <h2>🏆 ترتيب الفرق</h2>
+  <table>
+   <thead><tr><th>#</th><th>الفريق</th><th>لعب</th><th>النقاط</th></tr></thead>
+   <tbody id="standings"></tbody>
+  </table>
+ </section>
+
+ <section id="news" class="news" style="margin-top:40px">
+  <h2>📰 أخبار الكرة</h2>
+  <div class="card">
+   <h3>كرة القدم.. أكثر من مجرد لعبة</h3>
+   <p>من المدرجات إلى أرض الملعب، تبقى اللحظات الكروية والروح الرياضية جزءًا من جمال اللعبة.</p>
+  </div>
+ </section>
+</main>
+
+<footer>⚽ ملعب+ — صُنع لعشاق كرة القدم</footer>
+
+<script>
+const matches=[
+ {home:"برشلونة",away:"ريال مدريد",hs:2,as:1,league:"الدوري الإسباني"},
+ {home:"ليفربول",away:"مانشستر سيتي",hs:3,as:2,league:"الدوري الإنجليزي"},
+ {home:"الهلال",away:"النصر",hs:1,as:1,league:"دوري روشن"}
+];
+
+document.getElementById("matchCards").innerHTML=matches.map(m=>`
+ <article class="card">
+  <div class="badge">${m.league}</div>
+  <div class="teams">
+   <div class="team">${m.home}</div>
+   <div class="score">${m.hs} - ${m.as}</div>
+   <div class="team">${m.away}</div>
+  </div>
+  <div style="color:#9bb2a5;font-size:12px">نتيجة تجريبية</div>
+ </article>
+`).join("");
+
+const clubs=[
+ ["برشلونة",3,9],
+ ["الهلال",3,7],
+ ["ريال مدريد",3,6],
+ ["النصر",3,4],
+ ["ليفربول",3,3]
+];
+
+document.getElementById("standings").innerHTML=clubs.map((c,i)=>`
+ <tr>
+  <td>${i+1}</td>
+  <td>${c[0]}</td>
+  <td>${c[1]}</td>
+  <td>${c[2]}</td>
+ </tr>
+`).join("");
+</script>
+</body>
+</html>
